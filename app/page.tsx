@@ -100,21 +100,8 @@ const tableColumns = [
   },
   {
     Header: "Details",
-    Cell: ({ cell, row }) => {
-      const queryString = (id, obj) => {
-        const params = new URLSearchParams();
-        params.set(id, JSON.stringify(obj));
-        return params.toString();
-      };
-      return (
-        <Link
-          href={
-            "/objectPage" + "?" + queryString(row.original.id, row.original)
-          }
-        >
-          Explore
-        </Link>
-      );
+    Cell: ({ row }) => {
+      return <Link href={"/movie/" + row.original.id}>Explore</Link>;
     },
   },
 ];

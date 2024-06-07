@@ -27,9 +27,107 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function Page() {
+export default function Page({ params }) {
+  const [movie, setMovie] = useState({
+    adult: false,
+    backdrop_path: "/cXQH2u7wUIX1eoIdEj51kHXoWhX.jpg",
+    belongs_to_collection: null,
+    budget: 1350000,
+    genres: [
+      { id: 35, name: "Comedy" },
+      { id: 80, name: "Crime" },
+    ],
+    homepage:
+      "http://www.universalstudiosentertainment.com/lock-stock-and-two-smoking-barrels/",
+    id: 100,
+    imdb_id: "tt0120735",
+    origin_country: ["GB"],
+    original_language: "en",
+    original_title: "Lock, Stock and Two Smoking Barrels",
+    overview:
+      "A card shark and his unwillingly-enlisted friends need to make a lot of cash quick after losing a sketchy poker match. To do this they decide to pull a heist on a small-time gang who happen to be operating out of the flat next door.",
+    popularity: 17.142,
+    poster_path: "/wt2TRBmFmBn5M5MBcPTwovlREaB.jpg",
+    production_companies: [
+      {
+        id: 491,
+        logo_path: "/5LvDUt3KmvRnXQ4NrdWJYHeuA8J.png",
+        name: "Summit Entertainment",
+        origin_country: "US",
+      },
+      {
+        id: 21920,
+        logo_path: null,
+        name: "The Steve Tisch Company",
+        origin_country: "",
+      },
+      {
+        id: 13419,
+        logo_path: null,
+        name: "SKA Films",
+        origin_country: "GB",
+      },
+      {
+        id: 1382,
+        logo_path: "/8b5XGJ8YhZoEo9LgFP8KRQWHjYL.png",
+        name: "PolyGram Filmed Entertainment",
+        origin_country: "US",
+      },
+      {
+        id: 20076,
+        logo_path: "/i9qXGJIP9fGN22PP5jXUVENbyHi.png",
+        name: "Handmade Films",
+        origin_country: "GB",
+      },
+    ],
+    production_countries: [
+      { iso_3166_1: "GB", name: "United Kingdom" },
+      { iso_3166_1: "US", name: "United States of America" },
+    ],
+    release_date: "1998-08-28",
+    revenue: 28356188,
+    runtime: 105,
+    spoken_languages: [
+      { english_name: "English", iso_639_1: "en", name: "English" },
+    ],
+    status: "Released",
+    tagline: "A Disgrace to Criminals Everywhere.",
+    title: "Lock, Stock and Two Smoking Barrels",
+    video: false,
+    vote_average: 8.122,
+    vote_count: 6365,
+  });
   const router = useRouter();
+
+  // useEffect(() => {
+  //   const id = searchParams.get("id");
+
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       accept: "application/json",
+  //       Authorization:
+  //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YWQ2NjNjMmNmNGE3YmJjZWUxMGU2MjBkM2Q2MWM0NyIsInN1YiI6IjY2NWQ1YjFjOWEzYTQ2MGVmMWFiNDhjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TMM6ZMoleALYyAoqvw0xogE0nbBm2ln9oeD3qr_rSY8",
+  //     },
+  //   };
+
+  //   const getMovie = async (id) => {
+  //     console.log(id);
+  //     const response = await fetch(
+  //       `https://api.themoviedb.org/3/movie/${id}`,
+  //       options
+  //     );
+  //     const data = await response.json();
+  //     setMovie(data);
+  //     console.log(data);
+  //   };
+
+  //   return () => {
+  //     getMovie(id);
+  //   };
+  // }, [searchParams]);
 
   return (
     <ThemeProvider staticCssInjected>
@@ -47,28 +145,29 @@ export default function Page() {
         profile={<Avatar icon={employeeIcon} />}
       />
       {/* Add your code here */}
+      {params.id}
       <ObjectPage
         mode="Default"
         showHideHeaderButton
         selectedSectionId={"goals"}
-        //   selectedSubSectionId={}
+        selectedSubSectionId={""}
         headerContentPinnable
-        imageShapeCircle
-        image="https://sap.github.io/ui5-webcomponents-react/assets/Person-B7wHqdJw.png"
-        footer={
-          <Bar
-            design="FloatingFooter"
-            endContent={
-              <>
-                <Button design="Positive">Accept</Button>
-                <Button design="Negative">Reject</Button>
-              </>
-            }
-          />
-        }
+        // imageShapeCircle
+        // image="https://sap.github.io/ui5-webcomponents-react/assets/Person-B7wHqdJw.png"
+        // footer={
+        //   <Bar
+        //     design="FloatingFooter"
+        //     endContent={
+        //       <>
+        //         <Button design="Positive">Accept</Button>
+        //         <Button design="Negative">Reject</Button>
+        //       </>
+        //     }
+        //   />
+        // }
         headerContent={
           <DynamicPageHeader topHeaderHeight={1000}>
-            <FlexBox alignItems="Center">
+            {/* <FlexBox alignItems="Center">
               <FlexBox direction="Column">
                 <Link href="#">+33 6 4512 5158</Link>
                 <Link href="#">DeniseSmith@sap.com</Link>
@@ -80,7 +179,7 @@ export default function Page() {
                 <Label>San Jose</Label>
                 <Label>California, USA</Label>
               </FlexBox>
-            </FlexBox>
+            </FlexBox> */}
           </DynamicPageHeader>
         }
         headerTitle={
@@ -96,25 +195,25 @@ export default function Page() {
                 </BreadcrumbsItem>
               </Breadcrumbs>
             }
-            header={<Text>Denise Smith</Text>}
-            subHeader={<Text>Senior UI Developer</Text>}
+            header={<Text></Text>}
+            subHeader={<Text></Text>}
             navigationActions={<></>}
             showSubHeaderRight={false}
             //   actionsToolbarProps={}
             //   navigationActionsToolbarProps={}
-            expandedContent={
-              <MessageStrip>
-                Information (only visible if header content is expanded)
-              </MessageStrip>
-            }
-            snappedContent={
-              <MessageStrip>
-                Information (only visible if header content is
-                collapsed/snapped)
-              </MessageStrip>
-            }
+            // expandedContent={
+            //   <MessageStrip>
+            //     Information (only visible if header content is expanded)
+            //   </MessageStrip>
+            // }
+            // snappedContent={
+            //   <MessageStrip>
+            //     Information (only visible if header content is
+            //     collapsed/snapped)
+            //   </MessageStrip>
+            // }
           >
-            <ObjectStatus state="Success">Employed</ObjectStatus>
+            {/* <ObjectStatus state="Success">Employed</ObjectStatus> */}
           </DynamicPageTitle>
         }
         alwaysShowContentHeader
